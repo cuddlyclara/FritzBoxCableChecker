@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FritzBox Cable Checker
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5b
 // @description  Checks the data displayed on the "Kabel-Informationen" page of a Cable FritzBox.
 // @author       cuddlyclara
 // @match        http://fritz.box/*
@@ -166,53 +166,55 @@
     function checkHash() {
         if (window.location.hash === "#docInfo" && previousHash !== "#docInfo") {
             previousHash = window.location.hash; // Update previousHash after hash change to "#docInfo" to ensure the check runs only once
-            console.log("FritzBox Cable Checker is now checking...");
+            setTimeout(function() {
+                console.log("FritzBox Cable Checker is now checking...");
 
-            // Check Docsis31Ds
-            {
-                let modulation = document.querySelectorAll("#uiDocsis31Ds [role='cell'][prefid='modulation']");
-                let snr = document.querySelectorAll("#uiDocsis31Ds [role='cell'][prefid='mer']");
-                let power = document.querySelectorAll("#uiDocsis31Ds [role='cell'][prefid='powerLevel']");
+                // Check Docsis31Ds
+                {
+                    let modulation = document.querySelectorAll("#uiDocsis31Ds [role='cell'][prefid='modulation']");
+                    let snr = document.querySelectorAll("#uiDocsis31Ds [role='cell'][prefid='mer']");
+                    let power = document.querySelectorAll("#uiDocsis31Ds [role='cell'][prefid='powerLevel']");
 
-                for (let i = 0; i < modulation.length; i++) {
-                    // Check power and snr
-                    let powerResult = checkValue("Docsis31Ds", modulation[i].textContent, "power", power[i].textContent);
-                    let snrResult = checkValue("Docsis31Ds", modulation[i].textContent, "snr", snr[i].textContent);
+                    for (let i = 0; i < modulation.length; i++) {
+                        // Check power and snr
+                        let powerResult = checkValue("Docsis31Ds", modulation[i].textContent, "power", power[i].textContent);
+                        let snrResult = checkValue("Docsis31Ds", modulation[i].textContent, "snr", snr[i].textContent);
 
-                    // Set color for power
-                    if (powerResult) {
-                        power[i].style.color = powerResult;
-                    }
+                        // Set color for power
+                        if (powerResult) {
+                            power[i].style.color = powerResult;
+                        }
 
-                    // Set color for snr
-                    if (snrResult) {
-                        snr[i].style.color = snrResult;
-                    }
-                }
-            }
-
-            // Check Docsis30Ds
-            {
-                let modulation = document.querySelectorAll("#uiDocsis30Ds [role='cell'][prefid='modulation']");
-                let snr = document.querySelectorAll("#uiDocsis30Ds [role='cell'][prefid='mse']");
-                let power = document.querySelectorAll("#uiDocsis30Ds [role='cell'][prefid='powerLevel']");
-
-                for (let i = 0; i < modulation.length; i++) {
-                    // Check power and snr
-                    let powerResult = checkValue("Docsis30Ds", modulation[i].textContent, "power", power[i].textContent);
-                    let snrResult = checkValue("Docsis30Ds", modulation[i].textContent, "snr", snr[i].textContent);
-
-                    // Set color for power
-                    if (powerResult) {
-                        power[i].style.color = powerResult;
-                    }
-
-                    // Set color for snr
-                    if (snrResult) {
-                        snr[i].style.color = snrResult;
+                        // Set color for snr
+                        if (snrResult) {
+                            snr[i].style.color = snrResult;
+                        }
                     }
                 }
-            }
+
+                // Check Docsis30Ds
+                {
+                    let modulation = document.querySelectorAll("#uiDocsis30Ds [role='cell'][prefid='modulation']");
+                    let snr = document.querySelectorAll("#uiDocsis30Ds [role='cell'][prefid='mse']");
+                    let power = document.querySelectorAll("#uiDocsis30Ds [role='cell'][prefid='powerLevel']");
+
+                    for (let i = 0; i < modulation.length; i++) {
+                        // Check power and snr
+                        let powerResult = checkValue("Docsis30Ds", modulation[i].textContent, "power", power[i].textContent);
+                        let snrResult = checkValue("Docsis30Ds", modulation[i].textContent, "snr", snr[i].textContent);
+
+                        // Set color for power
+                        if (powerResult) {
+                            power[i].style.color = powerResult;
+                        }
+
+                        // Set color for snr
+                        if (snrResult) {
+                            snr[i].style.color = snrResult;
+                        }
+                    }
+                }
+            }, 1000);
         }
         else if (window.location.hash !== "#docInfo" && previousHash === "#docInfo") {
             previousHash = window.location.hash; // Update previousHash after leaving the "#docInfo" page to reenable check
