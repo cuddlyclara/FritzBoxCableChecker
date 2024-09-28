@@ -1,6 +1,6 @@
 # FritzBox Cable Checker
 
-This is a Tampermonkey script designed to analyze values on the "Kabel-Informationen" page of a FritzBox. It highlights important values based on the guidelines from [this source](https://debiandev.de/wp-content/uploads/2021/02/Bild-4.png).
+This is a Tampermonkey script designed to analyze values on the "Kabel-Informationen" page of a FritzBox. It highlights important values based on the guidelines from [this source](https://debiandev.de/wp-content/uploads/2021/02/Bild-4.png). Currently, this only checks the values of the download stream.
 
 ## Installation
 
