@@ -2,7 +2,7 @@
 // @name         FritzBox Cable Checker
 // @namespace    http://tampermonkey.net/
 // @version      1.4
-// @description  Checks the data displayed on the "Cable Information" page of a Cable FritzBox.
+// @description  Checks the data displayed on the "Kabel-Informationen" page of a Cable FritzBox.
 // @author       cuddlyclara
 // @match        http://fritz.box/*
 // @icon         https://www.google.com/s2/favicons?domain=avm.de
