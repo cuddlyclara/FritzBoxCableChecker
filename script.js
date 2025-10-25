@@ -5,7 +5,7 @@
 // @description  Checks the data displayed on the "Kabel-Informationen" page of a Cable FritzBox.
 // @author       cuddlyclara
 // @match        http://fritz.box/*
-// @icon         https://www.google.com/s2/favicons?domain=avm.de
+// @icon         https://www.google.com/s2/favicons?domain=fritz.com
 // @grant        none
 // ==/UserScript==
 
@@ -162,10 +162,10 @@
         }
     }
 
-    // Function to check the hash change to "#docInfo"
+    // Function to check the hash change to "#/cable/channels"
     function checkHash() {
-        if (window.location.hash === "#docInfo" && previousHash !== "#docInfo") {
-            previousHash = window.location.hash; // Update previousHash after hash change to "#docInfo" to ensure the check runs only once
+        if (window.location.hash === "#/cable/channels" && previousHash !== "#/cable/channels") {
+            previousHash = window.location.hash; // Update previousHash after hash change to "#/cable/channels" to ensure the check runs only once
             console.log("FritzBox Cable Checker is now checking...");
 
             // Check Docsis31Ds
@@ -214,8 +214,8 @@
                 }
             }
         }
-        else if (window.location.hash !== "#docInfo" && previousHash === "#docInfo") {
-            previousHash = window.location.hash; // Update previousHash after leaving the "#docInfo" page to reenable check
+        else if (window.location.hash !== "#/cable/channels" && previousHash === "#/cable/channels") {
+            previousHash = window.location.hash; // Update previousHash after leaving the "#/cable/channels" page to reenable check
         }
     }
 
