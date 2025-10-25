@@ -1,6 +1,12 @@
 # FritzBox Cable Checker
 
-This is a Tampermonkey script designed to analyze values on the "Kabel-Informationen" page of a FritzBox. It highlights important values based on the guidelines from [this source](https://debiandev.de/wp-content/uploads/2021/02/Bild-4.png). Currently, this only checks the values of the download stream. **Requires FRITZ!OS 8.0 or newer**.
+This is a Tampermonkey script designed to analyze modem values on the "Kabel-Informationen" page of a FritzBox. It highlights values in red for bad, orange for okay, and green for good according to the guidelines from [this source](https://debiandev.de/wp-content/uploads/2021/02/Bild-4.png):
+
+![modem guidelines](https://debiandev.de/wp-content/uploads/2021/02/Bild-4.png)
+
+A healthy cable connection should display only green values. Currently, this only checks the values of the download stream.
+
+**Requires FRITZ!OS 8.0 or newer**.
 
 ## Installation
 
@@ -8,4 +14,4 @@ To install the script, simply copy the contents of `script.js` from this reposit
 
 ## Screenshot
 
-![FritzBox Cable Checker Screenshot](https://github.com/user-attachments/assets/f98d6b88-81e8-4c4f-bca3-a7539bdba167)
+![FritzBox cable checker screenshot](https://github.com/user-attachments/assets/f98d6b88-81e8-4c4f-bca3-a7539bdba167)
