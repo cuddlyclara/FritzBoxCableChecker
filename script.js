@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FritzBox Cable Checker
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  Checks the data displayed on the "Kabel-Informationen" page of a Cable FritzBox.
 // @author       cuddlyclara
 // @match        http://fritz.box/*
@@ -134,7 +134,11 @@
 
         // Check power
         if (type == "power") {
-            let powerLimit = limits[docsis][modulation].power;
+            let powerLimit = limits[docsis]?.[modulation]?.power;
+
+            if (!powerLimit) {
+                return undefined;
+            }
 
             if (value >= powerLimit.good.min && value <= powerLimit.good.max) {
                 return "green";
@@ -148,7 +152,11 @@
         }
         // Check snr
         else if (type == "snr") {
-            let snrLimit = limits[docsis][modulation].snr;
+            let snrLimit = limits[docsis]?.[modulation]?.snr;
+
+            if (!snrLimit) {
+                return undefined;
+            }
 
             if (Math.abs(value) >= snrLimit.good.min) {
                 return "green";
